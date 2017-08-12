@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MusBatchSetting>
+	<SndInputBatLocal>false</SndInputBatLocal>
+	<RecStrokeMillis>0</RecStrokeMillis>
+	<RecClickMillis>0</RecClickMillis>
+	<RecDblClickMillis>0</RecDblClickMillis>
+	<RecMatome>true</RecMatome>
+	<StrokeMillis>30</StrokeMillis>
+	<ClickMillis>30</ClickMillis>
+	<DblClickMillis>30</DblClickMillis>
+	<SamplingMillis>10</SamplingMillis>
+	<RecStartMin>false</RecStartMin>
+	<RecEndUnmin>false</RecEndUnmin>
+	<RecRCtrlTeishi>false</RecRCtrlTeishi>
+	<StartMin>false</StartMin>
+	<EndUnmin>false</EndUnmin>
+	<RCtrlChuudan>false</RCtrlChuudan>
+</MusBatchSetting>

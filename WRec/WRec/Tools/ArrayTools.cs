@@ -105,32 +105,32 @@ namespace Charlotte.Tools
 			list.RemoveAt(list.Count - 1);
 		}
 
-		public static int IndexOf<T>(T[] array, T ferret, Comparison<T> comp)
+		public static int IndexOf<T>(T[] array, T target, Comparison<T> comp)
 		{
 			for (int index = 0; index < array.Length; index++)
-				if (comp(array[index], ferret) == 0)
+				if (comp(array[index], target) == 0)
 					return index;
 
 			return -1;
 		}
 
-		public static int IndexOf<T>(List<T> list, T ferret, Comparison<T> comp)
+		public static int IndexOf<T>(List<T> list, T target, Comparison<T> comp)
 		{
 			for (int index = 0; index < list.Count; index++)
-				if (comp(list[index], ferret) == 0)
+				if (comp(list[index], target) == 0)
 					return index;
 
 			return -1;
 		}
 
-		public static bool Contains<T>(T[] array, T ferret, Comparison<T> comp)
+		public static bool Contains<T>(T[] array, T target, Comparison<T> comp)
 		{
-			return IndexOf<T>(array, ferret, comp) != -1;
+			return IndexOf<T>(array, target, comp) != -1;
 		}
 
-		public static bool Contains<T>(List<T> list, T ferret, Comparison<T> comp)
+		public static bool Contains<T>(List<T> list, T target, Comparison<T> comp)
 		{
-			return IndexOf<T>(list, ferret, comp) != -1;
+			return IndexOf<T>(list, target, comp) != -1;
 		}
 
 		public static byte[] ByteSq(int bgnChr, int endChr)

@@ -206,6 +206,7 @@ namespace Charlotte
 				Gnd.I.Proc記録 = null;
 				this.RefreshUi();
 				this.RecEnded();
+				this.Refresh();
 				GC.Collect();
 			}
 			finally

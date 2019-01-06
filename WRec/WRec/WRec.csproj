@@ -91,7 +91,6 @@
     <Compile Include="Tools\CrossDictionaryTools.cs" />
     <Compile Include="Tools\CsvData.cs" />
     <Compile Include="Tools\DateTimeTools.cs" />
-    <Compile Include="Tools\DebugTools.cs" />
     <Compile Include="Tools\DictionaryTools.cs" />
     <Compile Include="Tools\DirectoryTools.cs" />
     <Compile Include="Tools\FileSorter.cs" />
@@ -116,6 +115,7 @@
     <Compile Include="Tools\WorkBenchDir.cs" />
     <Compile Include="Tools\XNode.cs" />
     <Compile Include="Tools\XYPoint.cs" />
+    <Compile Include="Utils.cs" />
     <EmbeddedResource Include="BusyDlg.resx">
       <DependentUpon>BusyDlg.cs</DependentUpon>
     </EmbeddedResource>

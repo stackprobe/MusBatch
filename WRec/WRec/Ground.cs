@@ -205,5 +205,10 @@ namespace Charlotte
 
 		public readonly string RecFile = WorkBenchDir.I.MakePath();
 		public string LastRanBatFile = null;
+
+		public bool Is初回起動()
+		{
+			return File.Exists(DatFile) == false; // ? SaveData()を1度も実行していない。
+		}
 	}
 }

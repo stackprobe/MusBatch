@@ -30,6 +30,8 @@ namespace Charlotte
 				CheckSelfDir();
 				CheckCopiedExe();
 
+				Utils.AntiWindowsDefenderSmartScreen();
+
 				Gnd.I.LoadConf();
 				Gnd.I.LoadData();
 

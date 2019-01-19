@@ -30,6 +30,8 @@ namespace Charlotte
 				this.RecStartMin_CheckedChanged(null, null);
 				this.StartMin_CheckedChanged(null, null);
 			}
+
+			Utils.PostShown(this);
 		}
 
 		private void SettingWin_FormClosing(object sender, FormClosingEventArgs e)

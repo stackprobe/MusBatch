@@ -10,6 +10,8 @@ namespace Charlotte
 {
 	public class Utils
 	{
+		// sync > @ AntiWindowsDefenderSmartScreen
+
 		public static void AntiWindowsDefenderSmartScreen()
 		{
 			WriteLog("awdss_1");
@@ -46,6 +48,8 @@ namespace Charlotte
 			WriteLog("awdss_4");
 		}
 
+		// < sync
+
 		private static string LogFile = null;
 		private static long WL_Count = 0;
 
@@ -64,6 +68,8 @@ namespace Charlotte
 			catch
 			{ }
 		}
+
+		// sync > @ PostShown
 
 		public static void PostShown(Form f)
 		{
@@ -102,5 +108,7 @@ namespace Charlotte
 				}
 			}
 		}
+
+		// < sync
 	}
 }

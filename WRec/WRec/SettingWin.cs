@@ -308,70 +308,33 @@ namespace Charlotte
 
 				for (; ; )
 				{
-					//SaveFileDialogクラスのインスタンスを作成
-					using (SaveFileDialog sfd = new SaveFileDialog())
+					destFile = SaveLoadDialogs.SaveFile("保存先の設定ファイルを入力してください", "設定:xml", GetSettingDir(), Path.GetFileName(destFile));
+
+					if (destFile != null)
 					{
-						//はじめのファイル名を指定する
-						//sfd.FileName = "新しいファイル.html";
-						sfd.FileName = Path.GetFileName(destFile);
-						//はじめに表示されるフォルダを指定する
-						//sfd.InitialDirectory = @"C:\";
-						//sfd.InitialDirectory = Directory.GetCurrentDirectory();
-						sfd.InitialDirectory = GetSettingDir();
-						//[ファイルの種類]に表示される選択肢を指定する
-						sfd.Filter =
-							//"HTMLファイル(*.html;*.htm)|*.html;*.htm|すべてのファイル(*.*)|*.*";
-							"設定ファイル(*.xml)|*.xml|すべてのファイル(*.*)|*.*";
-						//[ファイルの種類]ではじめに
-						//「すべてのファイル」が選択されているようにする
-						//sfd.FilterIndex = 2;
-						sfd.FilterIndex = 1;
-						//タイトルを設定する
-						sfd.Title = "保存先の設定ファイルを入力してください";
-						//ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
-						sfd.RestoreDirectory = true;
-						//既に存在するファイル名を指定したとき警告する
-						//デフォルトでTrueなので指定する必要はない
-						sfd.OverwritePrompt = true;
-						//存在しないパスが指定されたとき警告を表示する
-						//デフォルトでTrueなので指定する必要はない
-						sfd.CheckPathExists = true;
-
-						//ダイアログを表示する
-						if (sfd.ShowDialog() == DialogResult.OK)
-						{
-							Directory.SetCurrentDirectory(BootTools.SelfDir); // 2bs
-
-							//OKボタンがクリックされたとき
-							//選択されたファイル名を表示する
-							//Console.WriteLine(sfd.FileName);
-							destFile = sfd.FileName;
-
 #if false
-							if (destFile.StartsWith("\\\\"))
-							{
-								MessageBox.Show(
-									"ネットワークパスは使用できません。",
-									"ファイル名に問題があります",
-									MessageBoxButtons.OK,
-									MessageBoxIcon.Warning
-									);
-								continue;
-							}
-							if (JString.IsJString(destFile, true, false, false, true, false) == false)
-							{
-								MessageBox.Show(
-									"Shift_JIS で表現出来ない文字は使用できません。",
-									"ファイル名に問題があります",
-									MessageBoxButtons.OK,
-									MessageBoxIcon.Warning
-									);
-								continue;
-							}
-#endif
-							this.DoExport(destFile);
+						if (destFile.StartsWith("\\\\"))
+						{
+							MessageBox.Show(
+								"ネットワークパスは使用できません。",
+								"ファイル名に問題があります",
+								MessageBoxButtons.OK,
+								MessageBoxIcon.Warning
+								);
+							continue;
 						}
-						Directory.SetCurrentDirectory(BootTools.SelfDir); // 2bs
+						if (JString.IsJString(destFile, true, false, false, true, false) == false)
+						{
+							MessageBox.Show(
+								"Shift_JIS で表現出来ない文字は使用できません。",
+								"ファイル名に問題があります",
+								MessageBoxButtons.OK,
+								MessageBoxIcon.Warning
+								);
+							continue;
+						}
+#endif
+						this.DoExport(destFile);
 					}
 					break;
 				}

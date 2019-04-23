@@ -77,6 +77,7 @@
     <Compile Include="RestartDlg.Designer.cs">
       <DependentUpon>RestartDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="SaveLoadDialogs.cs" />
     <Compile Include="SettingWin.cs">
       <SubType>Form</SubType>
     </Compile>

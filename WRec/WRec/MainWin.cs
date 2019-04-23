@@ -241,75 +241,38 @@ namespace Charlotte
 
 			for (; ; )
 			{
-				//SaveFileDialogクラスのインスタンスを作成
-				using (SaveFileDialog sfd = new SaveFileDialog())
+				destFile = SaveLoadDialogs.SaveFile("保存先のバッチファイルを入力してください", "バッチ:bat", Gnd.I.OutDir, Path.GetFileName(destFile));
+
+				if (destFile != null)
 				{
-					//はじめのファイル名を指定する
-					//sfd.FileName = "新しいファイル.html";
-					sfd.FileName = Path.GetFileName(destFile);
-					//はじめに表示されるフォルダを指定する
-					//sfd.InitialDirectory = @"C:\";
-					//sfd.InitialDirectory = Directory.GetCurrentDirectory();
-					sfd.InitialDirectory = Gnd.I.OutDir;
-					//[ファイルの種類]に表示される選択肢を指定する
-					sfd.Filter =
-						//"HTMLファイル(*.html;*.htm)|*.html;*.htm|すべてのファイル(*.*)|*.*";
-						"バッチファイル(*.bat)|*.bat|すべてのファイル(*.*)|*.*";
-					//[ファイルの種類]ではじめに
-					//「すべてのファイル」が選択されているようにする
-					//sfd.FilterIndex = 2;
-					sfd.FilterIndex = 1;
-					//タイトルを設定する
-					sfd.Title = "保存先のバッチファイルを入力してください";
-					//ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
-					sfd.RestoreDirectory = true;
-					//既に存在するファイル名を指定したとき警告する
-					//デフォルトでTrueなので指定する必要はない
-					sfd.OverwritePrompt = true;
-					//存在しないパスが指定されたとき警告を表示する
-					//デフォルトでTrueなので指定する必要はない
-					sfd.CheckPathExists = true;
-
-					//ダイアログを表示する
-					if (sfd.ShowDialog() == DialogResult.OK)
+					if (destFile.StartsWith("\\\\"))
 					{
-						Directory.SetCurrentDirectory(BootTools.SelfDir); // 2bs
-
-						//OKボタンがクリックされたとき
-						//選択されたファイル名を表示する
-						//Console.WriteLine(sfd.FileName);
-						destFile = sfd.FileName;
-
-						if (destFile.StartsWith("\\\\"))
-						{
-							MessageBox.Show(
-								"ネットワークパスは使用できません。",
-								"ファイル名に問題があります",
-								MessageBoxButtons.OK,
-								MessageBoxIcon.Warning
-								);
-							continue;
-						}
-						if (JString.IsJString(destFile, true, false, false, true, false) == false)
-						{
-							MessageBox.Show(
-								"Shift_JIS で表現出来ない文字は使用できません。",
-								"ファイル名に問題があります",
-								MessageBoxButtons.OK,
-								MessageBoxIcon.Warning
-								);
-							continue;
-						}
-						Gnd.I.OutDir = Path.GetDirectoryName(destFile);
-
-						this.SaveData(); // 設定反映！！！
-
-						BusyDlg.Perform(delegate
-						{
-							new BatchConv(Gnd.I.RecFile, destFile).Perform();
-						});
+						MessageBox.Show(
+							"ネットワークパスは使用できません。",
+							"ファイル名に問題があります",
+							MessageBoxButtons.OK,
+							MessageBoxIcon.Warning
+							);
+						continue;
 					}
-					Directory.SetCurrentDirectory(BootTools.SelfDir); // 2bs
+					if (JString.IsJString(destFile, true, false, false, true, false) == false)
+					{
+						MessageBox.Show(
+							"Shift_JIS で表現出来ない文字は使用できません。",
+							"ファイル名に問題があります",
+							MessageBoxButtons.OK,
+							MessageBoxIcon.Warning
+							);
+						continue;
+					}
+					Gnd.I.OutDir = Path.GetDirectoryName(destFile);
+
+					this.SaveData(); // 設定反映！！！
+
+					BusyDlg.Perform(delegate
+					{
+						new BatchConv(Gnd.I.RecFile, destFile).Perform();
+					});
 				}
 				break;
 			}
@@ -324,83 +287,48 @@ namespace Charlotte
 
 			try
 			{
-				//OpenFileDialogクラスのインスタンスを作成
-				using (OpenFileDialog ofd = new OpenFileDialog())
+				string selFile = SaveLoadDialogs.LoadFile("実行するバッチファイルを選択して下さい", "バッチ:bat", Gnd.I.OutDir, "*.bat");
+
+				if (selFile != null)
 				{
-					//はじめのファイル名を指定する
-					//はじめに「ファイル名」で表示される文字列を指定する
-					ofd.FileName = "*.bat";
-					//はじめに表示されるフォルダを指定する
-					//指定しない（空の文字列）の時は、現在のディレクトリが表示される
-					//ofd.InitialDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-					ofd.InitialDirectory = Gnd.I.OutDir;
-					//[ファイルの種類]に表示される選択肢を指定する
-					//指定しないとすべてのファイルが表示される
-					ofd.Filter =
-						"バッチファイル(*.bat)|*.bat|すべてのファイル(*.*)|*.*";
-					//"HTMLファイル(*.html;*.htm)|*.html;*.htm|すべてのファイル(*.*)|*.*";
-					//[ファイルの種類]ではじめに
-					//「すべてのファイル」が選択されているようにする
-					// フィルタの何番目かってことみたい...
-					ofd.FilterIndex = 0;
-					//タイトルを設定する
-					ofd.Title = "実行するバッチファイルを選択して下さい";
-					//ダイアログボックスを閉じる前に現在のディレクトリを復元するようにする
-					ofd.RestoreDirectory = true;
-					//存在しないファイルの名前が指定されたとき警告を表示する
-					//デフォルトでTrueなので指定する必要はない
-					ofd.CheckFileExists = true;
-					//存在しないパスが指定されたとき警告を表示する
-					//デフォルトでTrueなので指定する必要はない
-					ofd.CheckPathExists = true;
-
-					//ダイアログを表示する
-					if (ofd.ShowDialog() == DialogResult.OK) // using ofd
+					if (selFile.StartsWith("\\\\"))
 					{
-						Directory.SetCurrentDirectory(BootTools.SelfDir); // 2bs
-
-						string selFile = ofd.FileName;
-
-						if (selFile.StartsWith("\\\\"))
-						{
-							MessageBox.Show(
-								"ネットワークパスは開けません。",
-								"ファイル名に問題があります",
-								MessageBoxButtons.OK,
-								MessageBoxIcon.Warning
-								);
-							return;
-						}
-						if (JString.IsJString(selFile, true, false, false, true, false) == false)
-						{
-							MessageBox.Show(
-								"Shift_JIS で表現出来ない文字を含むパスは開けません。",
-								"ファイル名に問題があります",
-								MessageBoxButtons.OK,
-								MessageBoxIcon.Warning
-								);
-							return;
-						}
-						if (StringTools.IsSame(".bat", Path.GetExtension(selFile), true) == false)
-						{
-							MessageBox.Show(
-								"選択されたパスはバッチファイルではありません。",
-								"ファイル名に問題があります",
-								MessageBoxButtons.OK,
-								MessageBoxIcon.Warning
-								);
-							return;
-						}
-						Gnd.I.LastRanBatFile = selFile;
-						Gnd.I.OutDir = Path.GetDirectoryName(Gnd.I.LastRanBatFile);
-
-						Gnd.I.Proc再生 = CommonTools.StartProc(Gnd.I.LastRanBatFile);
-						this.RefreshUi();
-
-						if (Gnd.I.StartMin)
-							this.WindowState = FormWindowState.Minimized;
+						MessageBox.Show(
+							"ネットワークパスは開けません。",
+							"ファイル名に問題があります",
+							MessageBoxButtons.OK,
+							MessageBoxIcon.Warning
+							);
+						return;
 					}
-					Directory.SetCurrentDirectory(BootTools.SelfDir); // 2bs
+					if (JString.IsJString(selFile, true, false, false, true, false) == false)
+					{
+						MessageBox.Show(
+							"Shift_JIS で表現出来ない文字を含むパスは開けません。",
+							"ファイル名に問題があります",
+							MessageBoxButtons.OK,
+							MessageBoxIcon.Warning
+							);
+						return;
+					}
+					if (StringTools.IsSame(".bat", Path.GetExtension(selFile), true) == false)
+					{
+						MessageBox.Show(
+							"選択されたパスはバッチファイルではありません。",
+							"ファイル名に問題があります",
+							MessageBoxButtons.OK,
+							MessageBoxIcon.Warning
+							);
+						return;
+					}
+					Gnd.I.LastRanBatFile = selFile;
+					Gnd.I.OutDir = Path.GetDirectoryName(Gnd.I.LastRanBatFile);
+
+					Gnd.I.Proc再生 = CommonTools.StartProc(Gnd.I.LastRanBatFile);
+					this.RefreshUi();
+
+					if (Gnd.I.StartMin)
+						this.WindowState = FormWindowState.Minimized;
 				}
 			}
 			finally

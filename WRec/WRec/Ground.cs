@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using Charlotte.Tools;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace Charlotte
 {
@@ -29,6 +30,7 @@ namespace Charlotte
 		public readonly string ConfFile = StringTools.Combine(BootTools.SelfDir, "WRec.conf");
 
 		public bool IgnoreVk16To18 = true;
+		public int LoopModeWaitSec = 5;
 
 		public void LoadConf()
 		{
@@ -44,13 +46,24 @@ namespace Charlotte
 				lines = dest.ToArray();
 				int c = 0;
 
+				if (int.Parse(lines[c++]) != lines.Length)
+					throw new Exception("Bad element number");
+
 				// ----
 
 				IgnoreVk16To18 = int.Parse(lines[c++]) != 0;
+				LoopModeWaitSec = int.Parse(lines[c++]);
 				// ここへ追加..
+
+				// ----
+
+				if (lines[c] != "\\e")
+					throw new Exception("Bad terminator");
 			}
-			catch
-			{ }
+			catch (Exception e)
+			{
+				Utils.WriteLog(e);
+			}
 		}
 
 		public readonly string DatFile = StringTools.Combine(BootTools.SelfDir, "WRec.dat");
@@ -97,6 +110,9 @@ namespace Charlotte
 
 		public void LoadData()
 		{
+			if (File.Exists(DatFile) == false)
+				return;
+
 			try
 			{
 				string[] lines = File.ReadAllLines(DatFile, Encoding.UTF8);
@@ -126,8 +142,10 @@ namespace Charlotte
 				OutDir = EraseDq(lines[c++]);
 				// ここへ追加..
 			}
-			catch
-			{ }
+			catch (Exception e)
+			{
+				Utils.WriteLog(e);
+			}
 		}
 
 		public void SaveData()
@@ -162,8 +180,10 @@ namespace Charlotte
 
 				File.WriteAllLines(DatFile, lines, Encoding.UTF8);
 			}
-			catch
-			{ }
+			catch (Exception e)
+			{
+				Utils.WriteLog(e);
+			}
 		}
 
 		// ----

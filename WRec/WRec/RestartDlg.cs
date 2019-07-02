@@ -11,8 +11,13 @@ namespace Charlotte
 {
 	public partial class RestartDlg : Form
 	{
+		public int RemainingTime = 50; // 単位 == 100 ミリ秒
+
+		// <---- prm
+
 		public bool OkPressed = false;
-		public int RemainTime = 49; // 単位 == 100 ミリ秒
+
+		// <---- ret
 
 		public RestartDlg()
 		{
@@ -64,9 +69,9 @@ namespace Charlotte
 
 			try
 			{
-				this.RemainTime--;
+				this.RemainingTime--;
 
-				if (this.RemainTime <= 0)
+				if (this.RemainingTime <= 0)
 				{
 					this.OkPressed = true;
 
@@ -85,7 +90,7 @@ namespace Charlotte
 
 		private void UpdateMainMessage()
 		{
-			this.MainMessage.Text = (this.RemainTime / 10) + " 秒後に同じバッチファイルを再生します...";
+			this.MainMessage.Text = (this.RemainingTime / 10) + " 秒後に同じバッチファイルを再生します...";
 		}
 	}
 }

@@ -434,6 +434,8 @@ namespace Charlotte
 			{
 				using (RestartDlg f = new RestartDlg())
 				{
+					f.RemainingTime = Gnd.I.LoopModeWaitSec * 10;
+
 					f.ShowDialog(this);
 
 					if (f.OkPressed)

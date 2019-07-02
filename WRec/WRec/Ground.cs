@@ -57,8 +57,11 @@ namespace Charlotte
 
 				// ----
 
-				if (lines[c] != "\\e")
-					throw new Exception("Bad terminator");
+				// 2019.7.2
+				// \e 排除
+				// 項目が追加されたとき、古い設定ファイルを読み込むと \e を項目として読んでしまう。
+				// この場合、例外(out of range)を投げてデフォルト値のままになってくれた方が良い。
+				// \e による行の過不足のチェックは有効要素数のチェックで代替する。
 			}
 			catch (Exception e)
 			{

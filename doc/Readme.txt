@@ -243,6 +243,7 @@
 　SndInput.exe RR X-RndRng Y-RndRng
 
 　　以降のMCコマンドの座標に誤差を与えます。
+　　誤差は、絶対値が「最大誤差」以下になるような整数をその都度ランダムに生成します。
 
 　　　X-RndRng ... X-座標の最大誤差
 　　　Y-RndRng ... Y-座標の最大誤差

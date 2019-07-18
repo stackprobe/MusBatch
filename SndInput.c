@@ -1,7 +1,7 @@
 #pragma comment(lib, "user32.lib")
 
 #include "C:\Factory\Common\all.h"
-#include "C:\Factory\Common\Options\CryptoRand.h"
+#include "libs\Random.h"
 
 #define SLEEP_ONCE_MILLIS 500
 
@@ -142,6 +142,7 @@ int main(int argc, char **argv)
 			m_minim(xRndRng, IMAX);
 			m_minim(yRndRng, IMAX);
 
+			InitRandom();
 			continue;
 		}
 		if(argIs("MC"))
@@ -153,10 +154,10 @@ int main(int argc, char **argv)
 			y = atoi(nextArg());
 
 			if(xRndRng)
-				x += (sint)(getCryptoRand64() % (uint64)(xRndRng * 2 + 1)) - (sint)xRndRng;
+				x += (sint)(GetRandom() % (xRndRng * 2 + 1)) - (sint)xRndRng;
 
 			if(yRndRng)
-				y += (sint)(getCryptoRand64() % (uint64)(yRndRng * 2 + 1)) - (sint)yRndRng;
+				y += (sint)(GetRandom() % (yRndRng * 2 + 1)) - (sint)yRndRng;
 
 //			cout("MOUSE_CURSOR: %d, %d\n", x, y);
 

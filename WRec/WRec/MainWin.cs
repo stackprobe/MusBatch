@@ -366,6 +366,9 @@ namespace Charlotte
 			if (Gnd.I.LastRanBatFile == null) // ? not ran batch
 				return;
 
+			if (File.Exists(Gnd.I.LastRanBatFile) == false) // ? lost batch
+				return;
+
 			Gnd.I.Proc再生 = CommonTools.StartProc(Gnd.I.LastRanBatFile);
 			this.RefreshUi();
 			GC.Collect();
@@ -413,6 +416,21 @@ namespace Charlotte
 						this.RefreshUi();
 						this.KilledBatch();
 						return;
+					}
+				}
+				if (Gnd.I.AntiScreenSaver)
+				{
+					switch ((int)(this.MT_Count % 300L))
+					{
+						case 0:
+							Utils.WriteLog("ES_SYSTEM_REQUIRED");
+							Win32.SetThreadExecutionState(Win32.ExecutionState.ES_SYSTEM_REQUIRED);
+							break;
+
+						case 1:
+							Utils.WriteLog("ES_DISPLAY_REQUIRED");
+							Win32.SetThreadExecutionState(Win32.ExecutionState.ES_DISPLAY_REQUIRED);
+							break;
 					}
 				}
 			}

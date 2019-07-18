@@ -1,6 +1,7 @@
 #pragma comment(lib, "user32.lib")
 
 #include "C:\Factory\Common\all.h"
+#include "C:\Factory\Common\Options\CryptoRand.h"
 
 #define SLEEP_ONCE_MILLIS 500
 
@@ -126,10 +127,23 @@ static void CheckBreak(void)
 }
 int main(int argc, char **argv)
 {
+	uint xRndRng = 0;
+	uint yRndRng = 0;
+
 	while(hasArgs(1))
 	{
 		CheckBreak();
 
+		if(argIs("RR"))
+		{
+			xRndRng = toValue(nextArg());
+			yRndRng = toValue(nextArg());
+
+			m_minim(xRndRng, IMAX);
+			m_minim(yRndRng, IMAX);
+
+			continue;
+		}
 		if(argIs("MC"))
 		{
 			sint x;
@@ -137,6 +151,12 @@ int main(int argc, char **argv)
 
 			x = atoi(nextArg());
 			y = atoi(nextArg());
+
+			if(xRndRng)
+				x += (sint)(getCryptoRand64() % (uint64)(xRndRng * 2 + 1)) - (sint)xRndRng;
+
+			if(yRndRng)
+				y += (sint)(getCryptoRand64() % (uint64)(yRndRng * 2 + 1)) - (sint)yRndRng;
 
 //			cout("MOUSE_CURSOR: %d, %d\n", x, y);
 

@@ -117,6 +117,7 @@
     <Compile Include="Tools\XNode.cs" />
     <Compile Include="Tools\XYPoint.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="Win32.cs" />
     <EmbeddedResource Include="BusyDlg.resx">
       <DependentUpon>BusyDlg.cs</DependentUpon>
     </EmbeddedResource>

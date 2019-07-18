@@ -29,8 +29,14 @@ namespace Charlotte
 
 		public readonly string ConfFile = StringTools.Combine(BootTools.SelfDir, "WRec.conf");
 
+		// ---- Items ----
+
 		public bool IgnoreVk16To18 = true;
 		public int LoopModeWaitSec = 5;
+		public bool AntiScreenSaver = false;
+		// ここへ追加..
+
+		// ----
 
 		public void LoadConf()
 		{
@@ -49,10 +55,11 @@ namespace Charlotte
 				if (int.Parse(lines[c++]) != lines.Length)
 					throw new Exception("Bad element number");
 
-				// ----
+				// ---- Items ----
 
 				IgnoreVk16To18 = int.Parse(lines[c++]) != 0;
 				LoopModeWaitSec = int.Parse(lines[c++]);
+				AntiScreenSaver = int.Parse(lines[c++]) != 0;
 				// ここへ追加..
 
 				// ----
@@ -62,6 +69,17 @@ namespace Charlotte
 				// 項目が追加されたとき、古い設定ファイルを読み込むと \e を項目として読んでしまう。
 				// この場合、例外(out of range)を投げてデフォルト値のままになってくれた方が良い。
 				// \e による行の過不足のチェックは有効要素数のチェックで代替する。
+
+				Utils.WriteLog("Conf...");
+
+				// ---- Items ----
+
+				Utils.WriteLog(IgnoreVk16To18);
+				Utils.WriteLog(LoopModeWaitSec);
+				Utils.WriteLog(AntiScreenSaver);
+				// ここへ追加..
+
+				// ----
 			}
 			catch (Exception e)
 			{

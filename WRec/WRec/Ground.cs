@@ -33,7 +33,9 @@ namespace Charlotte
 
 		public bool IgnoreVk16To18 = true;
 		public int LoopModeWaitSec = 5;
+		public bool RestartDlgTopMost = true;
 		public bool AntiScreenSaver = false;
+		public int ClearLogCycle = 1000;
 		// ここへ追加..
 
 		// ----
@@ -58,8 +60,10 @@ namespace Charlotte
 				// ---- Items ----
 
 				IgnoreVk16To18 = int.Parse(lines[c++]) != 0;
-				LoopModeWaitSec = int.Parse(lines[c++]);
+				LoopModeWaitSec = Utils.ToRange(int.Parse(lines[c++]), 1, 86400000); // 1 sec ～ 1000 day
+				RestartDlgTopMost = int.Parse(lines[c++]) != 0;
 				AntiScreenSaver = int.Parse(lines[c++]) != 0;
+				ClearLogCycle = Utils.ToRange(int.Parse(lines[c++]), 10, 1000000000); // 10 ～ IMAX
 				// ここへ追加..
 
 				// ----
@@ -72,11 +76,13 @@ namespace Charlotte
 
 				Utils.WriteLog("Conf...");
 
-				// ---- Items ----
+				// ---- Items ---- log
 
 				Utils.WriteLog(IgnoreVk16To18);
 				Utils.WriteLog(LoopModeWaitSec);
+				Utils.WriteLog(RestartDlgTopMost);
 				Utils.WriteLog(AntiScreenSaver);
+				Utils.WriteLog(ClearLogCycle);
 				// ここへ追加..
 
 				// ----

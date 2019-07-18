@@ -69,6 +69,10 @@ namespace Charlotte
 
 			try
 			{
+				if (Gnd.I.RestartDlgTopMost && 1 <= this.MT_Count && this.MT_Count <= 3) // 2bs
+				{
+					this.TopMost = this.MT_Count % 2 == 1;
+				}
 				this.RemainingTime--;
 
 				if (this.RemainingTime <= 0)

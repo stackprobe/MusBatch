@@ -65,7 +65,7 @@ namespace Charlotte
 				if (LogFile == null)
 					LogFile = Path.Combine(BootTools.SelfDir, Path.GetFileNameWithoutExtension(BootTools.SelfFile) + ".log");
 
-				using (StreamWriter writer = new StreamWriter(LogFile, WL_Count++ % 1000 != 0, Encoding.UTF8))
+				using (StreamWriter writer = new StreamWriter(LogFile, WL_Count++ % Gnd.I.ClearLogCycle != 0, Encoding.UTF8))
 				{
 					writer.WriteLine("[" + DateTime.Now + "." + WL_Count.ToString("D3") + "] " + message);
 				}
@@ -131,5 +131,10 @@ namespace Charlotte
 		}
 
 		// < sync
+
+		public static int ToRange(int value, int minval, int maxval)
+		{
+			return Math.Max(minval, Math.Min(maxval, value));
+		}
 	}
 }

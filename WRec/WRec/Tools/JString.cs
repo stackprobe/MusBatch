@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Charlotte.Tools
 {
-	public class JString
+	public static class JString
 	{
 		public const int MINLEN = 0;
 		public const int MAXLEN = 50000;

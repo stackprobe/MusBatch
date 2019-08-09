@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace Charlotte
 {
-	public class CommonTools
+	public static class CommonTools
 	{
 		public static Process StartProc(string file, string args = "")
 		{

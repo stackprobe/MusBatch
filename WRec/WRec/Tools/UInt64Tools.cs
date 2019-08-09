@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Charlotte.Tools
 {
-	public class UInt64Tools
+	public static class UInt64Tools
 	{
 		public const UInt64 IMAX = 1000000000ul; // 10^9
 		public const UInt64 IMAX_64 = 1000000000000000000ul; // 10^18

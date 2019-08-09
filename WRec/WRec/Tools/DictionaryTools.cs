@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Charlotte.Tools
 {
-	public class DictionaryTools
+	public static class DictionaryTools
 	{
 		public static Dictionary<string, V> Create<V>()
 		{

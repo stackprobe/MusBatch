@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace Charlotte
 {
-	public class Win32
+	public static class Win32
 	{
 		[FlagsAttribute]
 		public enum ExecutionState : uint // DWORD -> unsigned long @ WinNT.h -> WinDef.h

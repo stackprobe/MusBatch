@@ -8,7 +8,7 @@ using Charlotte.Tools;
 
 namespace Charlotte
 {
-	public class Utils
+	public static class Utils
 	{
 		// sync > @ AntiWindowsDefenderSmartScreen
 

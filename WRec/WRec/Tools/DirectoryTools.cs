@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Charlotte.Tools
 {
-	public class DirectoryTools
+	public static class DirectoryTools
 	{
 		public static List<string> GetAllDir(string rootDir)
 		{

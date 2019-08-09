@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Charlotte.Tools
 {
-	public class ArrayTools
+	public static class ArrayTools
 	{
 		public static T[] GetPart<T>(T[] src, int startPos, int count)
 		{

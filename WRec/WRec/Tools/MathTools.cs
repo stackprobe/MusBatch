@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Charlotte.Tools
 {
-	public class MathTools
+	public static class MathTools
 	{
 		private static Random _random = new Random();
 

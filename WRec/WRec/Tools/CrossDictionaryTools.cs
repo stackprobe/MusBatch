@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Charlotte.Tools
 {
-	public class CrossDictionaryTools
+	public static class CrossDictionaryTools
 	{
 		public static CrossDictionary<string, string> Create()
 		{

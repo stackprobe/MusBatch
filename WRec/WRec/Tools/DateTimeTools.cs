@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Charlotte.Tools
 {
-	public class DateTimeTools
+	public static class DateTimeTools
 	{
 		public static string GetCommonString(DateTime dt)
 		{

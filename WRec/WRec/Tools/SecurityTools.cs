@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Charlotte.Tools
 {
-	public class SecurityTools
+	public static class SecurityTools
 	{
 		public static string GetSHA512_128String(byte[] block)
 		{

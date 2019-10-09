@@ -71,6 +71,8 @@ namespace Charlotte
 			return SaveLoadFile(title, filterString, initialDir, initialFile, initializer, false);
 		}
 
+		public static bool SaveFileOverwritePrompt = true;
+
 		private static string SaveLoadFile(string title, string filterString, string initialDir, string initialFile, Action<FileDialog> initializer, bool saveFlag)
 		{
 			string homeDir = Directory.GetCurrentDirectory();
@@ -87,6 +89,9 @@ namespace Charlotte
 
 					if (initializer != null)
 						initializer(dlg);
+
+					if (saveFlag)
+						((SaveFileDialog)dlg).OverwritePrompt = SaveFileOverwritePrompt;
 
 					if (dlg.ShowDialog() == DialogResult.OK)
 					{

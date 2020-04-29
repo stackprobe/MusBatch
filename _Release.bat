@@ -11,4 +11,4 @@ C:\Factory\SubTools\EmbedConfig.exe --factory-dir-disabled out\SndInput.exe
 
 C:\Factory\SubTools\zip.exe /O out MusBatch
 
-PAUSE
+IF NOT "%1" == "/-P" PAUSE

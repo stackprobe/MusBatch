@@ -14,7 +14,7 @@
 #include "C:\Factory\Common\all.h"
 
 #define REC_MAX 360000
-#define REC_MARGIN 10 // XXX
+#define REC_MARGIN 10 // todo
 
 static uint MtxProc;
 static uint EvStop;

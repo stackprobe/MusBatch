@@ -7,7 +7,7 @@
 ビルド済み配布物
 ----------------
 
-http://stackprobe.dip.jp/MusBatch
+http://stackprobe.ccsp.mydns.jp/MusBatch
 
 
 マニュアル

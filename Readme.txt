@@ -15,3 +15,10 @@ http://stackprobe.ccsp.mydns.jp/MusBatch
 
 https://github.com/stackprobe/MusBatch/blob/master/doc/Readme.txt
 
+
+その他
+------
+
+RecInput.c , SndInput.c の Factory とリンクしない_ver
+https://github.com/soleil-taruto/Store/tree/main/MusBatchCmd
+
